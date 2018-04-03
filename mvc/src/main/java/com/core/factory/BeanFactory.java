@@ -1,0 +1,14 @@
+package com.core.factory;
+
+import com.core.exception.BeansException;
+
+public interface BeanFactory {
+	
+	Object getBean(String name);
+
+	public <T> T getBean(String name, Class<T> requiredType) throws BeansException;
+
+	public Object getBean(String name, Object... args) throws BeansException;
+
+	public <T> T getBean(String name, Class<T> requiredType, Object... args) throws BeansException;
+}

@@ -1,4 +1,4 @@
-package com.mvc.controller;
+package com.test;
 
 import com.mvc.annotation.Controller;
 import com.mvc.annotation.RequestMapping;

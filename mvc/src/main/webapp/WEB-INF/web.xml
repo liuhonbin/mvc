@@ -17,4 +17,8 @@
 		<servlet-name>MySpringMVC</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+
+	<listener>
+		<listener-class>com.core.listener.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>
