@@ -3,8 +3,8 @@ package com.test;
 import javax.sql.DataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.core.annotation.Bean;
-import com.core.annotation.Configuration;
+import com.lhb.core.annotation.Bean;
+import com.lhb.core.annotation.Configuration;
 
 @Configuration
 public final class DataSourceConfiguration {

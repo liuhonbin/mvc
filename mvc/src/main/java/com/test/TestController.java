@@ -1,17 +1,16 @@
 package com.test;
 
-import com.mvc.annotation.Controller;
-import com.mvc.annotation.RequestMapping;
-import com.mvc.annotation.ResponseBody;
+import com.lhb.mvc.annotation.Controller;
+import com.lhb.mvc.annotation.RequestMapping;
+import com.lhb.mvc.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
 
 	@RequestMapping("test.do")
-	@ResponseBody
 	public String tets() {
-		return "../index.jsp";
+		return "redirect:../index.jsp";
 	}
 
 	@RequestMapping("test1do")
