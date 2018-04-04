@@ -6,7 +6,7 @@
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
 		<servlet-name>MySpringMVC</servlet-name>
-		<servlet-class>com.mvc.core.DispatcherServlet</servlet-class>
+		<servlet-class>com.lhb.mvc.core.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>application.properties</param-value>
@@ -19,6 +19,6 @@
 	</servlet-mapping>
 
 	<listener>
-		<listener-class>com.core.listener.ContextLoaderListener</listener-class>
+		<listener-class>com.lhb.core.listener.ContextLoaderListener</listener-class>
 	</listener>
 </web-app>

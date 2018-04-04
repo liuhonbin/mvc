@@ -6,11 +6,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME) // ע�����class�ֽ����ļ��д��ڣ�������ʱ����ͨ�������ȡ��
-@Target({ElementType.METHOD})//����ע�������Ŀ��**���÷�Χ�ֶΡ�ö�ٵĳ���/����
-@Documented//˵����ע�⽫��������javadoc��
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.METHOD })
+@Documented
 public @interface Update {
-   
-	abstract String sql() default ""; 
-	
+
+	abstract String sql() default "";
+
+	String dataSourceName() default "datasource";
+
 }

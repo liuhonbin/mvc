@@ -13,4 +13,5 @@ public @interface Delete {
      
 	abstract String sql() default ""; 
 	 
+	String dataSourceName() default "datasource";
 }

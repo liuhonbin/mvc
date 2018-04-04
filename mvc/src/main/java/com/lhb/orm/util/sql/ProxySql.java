@@ -6,6 +6,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import javax.sql.DataSource;
+
+import com.lhb.core.exception.BeansException;
+import com.lhb.core.factory.Bean4Obtain;
+import com.lhb.core.factory.BeanFactory;
 import com.lhb.orm.annotation.Delete;
 import com.lhb.orm.annotation.Sql;
 import com.lhb.orm.annotation.Update;
@@ -14,7 +19,17 @@ import com.lhb.orm.base.BaseEntity;
 import com.lhb.orm.base.impl.BaseImpl;
 
 public class ProxySql implements InvocationHandler {
-	private BaseDao dao = new BaseImpl();
+	private BaseDao dao;
+	private BeanFactory factory = new Bean4Obtain();
+
+	public ProxySql() {
+		try {
+			dao = new BaseImpl(factory.getBean("datasource", DataSource.class));
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static Object newInstance(Class<?> clazz) {
 		@SuppressWarnings("rawtypes")
@@ -60,5 +75,4 @@ public class ProxySql implements InvocationHandler {
 		return null;
 	}
 
-	
 }

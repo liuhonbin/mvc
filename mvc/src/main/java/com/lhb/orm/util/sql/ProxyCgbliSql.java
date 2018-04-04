@@ -4,6 +4,11 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import javax.sql.DataSource;
+
+import com.lhb.core.exception.BeansException;
+import com.lhb.core.factory.Bean4Obtain;
+import com.lhb.core.factory.BeanFactory;
 import com.lhb.orm.annotation.Delete;
 import com.lhb.orm.annotation.Sql;
 import com.lhb.orm.annotation.Update;
@@ -13,14 +18,19 @@ import com.lhb.orm.base.impl.BaseImpl;
 
 import net.sf.cglib.proxy.InvocationHandler;
 
-
-
 public class ProxyCgbliSql implements InvocationHandler {
 
-	private BaseDao dao = new BaseImpl();
+	private BaseDao dao;
+	private BeanFactory factory = new Bean4Obtain();
 
 	public ProxyCgbliSql() {
 		// TODO Auto-generated constructor stub
+		try {
+			dao = new BaseImpl(factory.getBean("datasource", DataSource.class));
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

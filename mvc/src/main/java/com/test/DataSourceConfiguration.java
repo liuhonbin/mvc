@@ -16,7 +16,6 @@ public final class DataSourceConfiguration {
 		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/xs");
 		dataSource.setUsername("root");
 		dataSource.setPassword("123456");
-		System.out.println("我被装入容器了哦····························");
 		return dataSource;
 	}
 }

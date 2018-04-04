@@ -1,39 +1,27 @@
 package com.test;
 
+import java.util.List;
+
+import com.dao.BookDao;
+import com.entiy.Book;
 import com.lhb.mvc.annotation.Controller;
 import com.lhb.mvc.annotation.RequestMapping;
 import com.lhb.mvc.annotation.ResponseBody;
+import com.lhb.orm.util.JdbcLhbTemplate;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
 
+	private BookDao dao = JdbcLhbTemplate.executeProxyCgbli(BookDao.class);
+
 	@RequestMapping("test.do")
-	public String tets() {
-		return "redirect:../index.jsp";
+	@ResponseBody
+	public List<Book> tets() {
+		Book book = new Book();
+		book.setBook_name("我的测试数据68");
+		List<Book> list = dao.getList(book);
+		return list;
 	}
 
-	@RequestMapping("test1do")
-	@ResponseBody
-	public String tets1() {
-		return "../index.jsp";
-	}
-
-	@RequestMapping("test2.do")
-	@ResponseBody
-	public String tets2() {
-		return "../index.jsp";
-	}
-
-	@RequestMapping("test3.do")
-	@ResponseBody
-	public String tets3() {
-		return "../index.jsp";
-	}
-
-	@RequestMapping("test4.do")
-	@ResponseBody
-	public String tets4() {
-		return "../index.jsp";
-	}
 }

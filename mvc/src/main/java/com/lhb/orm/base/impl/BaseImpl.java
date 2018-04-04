@@ -6,14 +6,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import com.lhb.orm.base.BaseDao;
 import com.lhb.orm.base.BaseEntity;
 import com.lhb.orm.util.DBUtil;
 import com.lhb.orm.util.DTOUtils;
 import com.lhb.orm.util.SqlUtil;
 
-
 public class BaseImpl implements BaseDao {
+
+	protected DBUtil dbUtil;
+
+	public BaseImpl(DataSource dataSource) {
+		dbUtil = new DBUtil(dataSource);
+	}
 
 	public <T> List<T> getList(String sql, Class<T> clazz, BaseEntity baseEntity) {
 		List<T> list = new ArrayList<T>();
@@ -21,7 +28,7 @@ public class BaseImpl implements BaseDao {
 		ResultSet rs = null;
 		try {
 			newSql = SqlUtil.sqlPrament(sql, baseEntity);
-			rs = DBUtil.query(newSql);
+			rs = dbUtil.query(newSql);
 			while (rs.next()) {
 				list.add(DTOUtils.ReqBuildEntity(rs, clazz));
 			}
@@ -52,7 +59,7 @@ public class BaseImpl implements BaseDao {
 		ResultSet rs = null;
 		try {
 			newSql = SqlUtil.sqlPrament(sql, baseEntity);
-			rs = DBUtil.query(newSql);
+			rs = dbUtil.query(newSql);
 			while (rs.next()) {
 				return DTOUtils.ReqBuildEntity(rs, clazz);
 			}
@@ -83,7 +90,7 @@ public class BaseImpl implements BaseDao {
 		int a = 0;
 		try {
 			String new_sql = SqlUtil.sqlPrament(sql, baseEntity);
-			a = DBUtil.other(new_sql);
+			a = dbUtil.other(new_sql);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,7 +115,7 @@ public class BaseImpl implements BaseDao {
 		int a = 0;
 		try {
 			String new_sql = SqlUtil.sqlPrament(sql, baseEntity);
-			a = DBUtil.other(new_sql);
+			a = dbUtil.other(new_sql);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

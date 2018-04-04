@@ -5,25 +5,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
+
 /**
  * 数据库连接
+ * 
  * @author liuhonbin
  *
  */
 public class DBUtil {
-    
-	private static DB db = new DB();
-	
-   /**
-    *查询调用 
-    * @return
-    */
-	public static ResultSet query(String sql) {
+
+	protected DataSource dataSource;
+
+	public DBUtil(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	/**
+	 * 查询调用
+	 * 
+	 * @return
+	 */
+	public ResultSet query(String sql) {
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			conn = db.getConnection();
+			conn = dataSource.getConnection();
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 		} catch (SQLException e) {
@@ -32,14 +40,12 @@ public class DBUtil {
 		}
 		return rs;
 	}
-	
-	
-	
-	public static int other(String sql){
+
+	public int other(String sql) {
 		Connection conn = null;
 		Statement st = null;
 		try {
-			conn = db.getConnection();
+			conn = dataSource.getConnection();
 			conn.setAutoCommit(false);
 			st = conn.createStatement();
 			st.addBatch(sql);
@@ -55,9 +61,8 @@ public class DBUtil {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		}finally {
-			db.close(null, st, conn);
 		}
 		return 0;
 	}
-   }
+
+}

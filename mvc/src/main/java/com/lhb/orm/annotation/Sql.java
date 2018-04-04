@@ -15,4 +15,6 @@ public @interface Sql {
 	  abstract String sql() default ""; 
 	 
 	  abstract Class<?> return_type();
+	  
+	  String dataSourceName() default "datasource";
 }
