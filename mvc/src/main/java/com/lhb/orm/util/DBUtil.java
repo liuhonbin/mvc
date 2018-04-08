@@ -21,6 +21,11 @@ public class DBUtil {
 		this.dataSource = dataSource;
 	}
 
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+
 	/**
 	 * 查询调用
 	 * 

@@ -22,7 +22,11 @@ public class BaseImpl implements BaseDao {
 		dbUtil = new DBUtil(dataSource);
 	}
 
-	public <T> List<T> getList(String sql, Class<T> clazz, BaseEntity baseEntity) {
+	public void setDataSource(DataSource dataSource) throws RuntimeException {
+		dbUtil.setDataSource(dataSource);
+	}
+
+	public <T> List<T> getList(String sql, Class<T> clazz, Object baseEntity) {
 		List<T> list = new ArrayList<T>();
 		String newSql = null;
 		ResultSet rs = null;
@@ -54,7 +58,7 @@ public class BaseImpl implements BaseDao {
 		return list;
 	}
 
-	public <T> T queryForObject(String sql, Class<T> clazz, BaseEntity baseEntity) {
+	public <T> T queryForObject(String sql, Class<T> clazz, Object baseEntity) {
 		String newSql = null;
 		ResultSet rs = null;
 		try {
@@ -85,7 +89,7 @@ public class BaseImpl implements BaseDao {
 		return null;
 	}
 
-	public int update(String sql, BaseEntity baseEntity) {
+	public int update(String sql, Object baseEntity) {
 		// TODO Auto-generated method stub
 		int a = 0;
 		try {
@@ -110,7 +114,7 @@ public class BaseImpl implements BaseDao {
 		return a;
 	}
 
-	public int delete(String sql, BaseEntity baseEntity) {
+	public int delete(String sql, Object baseEntity) {
 		// TODO Auto-generated method stub
 		int a = 0;
 		try {
@@ -133,6 +137,38 @@ public class BaseImpl implements BaseDao {
 			e.printStackTrace();
 		}
 		return a;
+	}
+
+	@Override
+	public <T> int add(String sql, Object baseEntity) {
+		// TODO Auto-generated method stub
+		int a = 0;
+		try {
+			String new_sql = SqlUtil.sqlPrament(sql, baseEntity);
+			a = dbUtil.other(new_sql);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return a;
+	}
+
+	@Override
+	public <T> int add(String sql, List<Object> list) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

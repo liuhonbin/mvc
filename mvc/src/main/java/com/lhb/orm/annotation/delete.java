@@ -9,9 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME) 
 @Target({ElementType.METHOD})
 @Documented
-public @interface Delete {
+public @interface delete {
      
 	abstract String sql() default ""; 
 	 
 	String dataSourceName() default "datasource";
+	
+	String type() default "DELETE";
 }

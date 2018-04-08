@@ -10,11 +10,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME) 
 @Target({ElementType.METHOD})
 @Documented
-public @interface Sql {
+public @interface select {
    
 	  abstract String sql() default ""; 
 	 
 	  abstract Class<?> return_type();
 	  
 	  String dataSourceName() default "datasource";
+	  
+	  String type() default "SELECT";
 }
