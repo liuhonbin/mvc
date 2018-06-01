@@ -25,7 +25,6 @@ public class DBUtil {
 		this.dataSource = dataSource;
 	}
 
-
 	/**
 	 * 查询调用
 	 * 
@@ -51,21 +50,11 @@ public class DBUtil {
 		Statement st = null;
 		try {
 			conn = dataSource.getConnection();
-			conn.setAutoCommit(false);
 			st = conn.createStatement();
-			st.addBatch(sql);
-			conn.commit();
-			return 1;
+			int a = st.executeUpdate(sql);
+			return a;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				conn.rollback();
-				return 0;
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 		return 0;
 	}

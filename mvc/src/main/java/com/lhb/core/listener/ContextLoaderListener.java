@@ -7,11 +7,12 @@ import com.lhb.core.ApplicationContext;
 import com.lhb.core.ContextLoader;
 
 public class ContextLoaderListener extends ContextLoader implements ServletContextListener {
+	private ApplicationContext applicationContext = ApplicationContext.getInstance();
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		super.init();
-		ApplicationContext.init();
+		applicationContext.init();
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -125,7 +126,7 @@ public class DispatcherServlet extends HttpServlet {
 					isresponseBody = true;
 					// LhbResponseBody responseBody = (LhbResponseBody) annotation;
 					HttpMessageConverter converter = new HttpMessageConverter();
-					response.getWriter().print(converter.convert(obj));
+					response.getOutputStream().print(converter.convert(obj,response).toString());
 					return;
 				}
 			}
@@ -226,7 +227,9 @@ public class DispatcherServlet extends HttpServlet {
 					url = (baseUrl + "/" + url).replaceAll("(/\\*/)|(/+)", "/");
 					handlerMapping.put(url, method);
 					controllerMap.put(url, clazz.newInstance());
-					logger.debug("Mapped:{[" + url + "]}" + "onto " + method);
+					if(logger.isDebugEnabled()) {
+						logger.debug("Mapped:{[" + url + "]}" + "onto " + method);
+					}
 				}
 			}
 		} catch (Exception e) {

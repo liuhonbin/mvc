@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import com.lhb.core.ApplicationContext;
+import com.lhb.core.BeanContainer;
 import com.lhb.core.annotation.Bean;
 
 /**
@@ -15,7 +15,13 @@ import com.lhb.core.annotation.Bean;
  */
 public class ConfigurationFactory {
 
-	public static void parsingConfiguration(Class<?> clazz) {
+	private BeanContainer beanContainer = BeanContainer.getInstance();
+	
+	private ConfigurationFactory() {
+		
+	}
+
+	public void parsingConfiguration(Class<?> clazz) {
 		Object t;
 		try {
 			t = clazz.newInstance();
@@ -25,10 +31,10 @@ public class ConfigurationFactory {
 					if (annotation instanceof Bean) {
 						Bean bean = (Bean) annotation;
 						if ("".equals(bean.name())) {
-							ApplicationContext.ioc.put(method.getReturnType().getSimpleName().toLowerCase(),
+							beanContainer.setBean(method.getReturnType().getSimpleName().toLowerCase(),
 									method.invoke(t, null));
 						} else {
-							ApplicationContext.ioc.put(bean.name(), method.invoke(t, null));
+							beanContainer.setBean(bean.name(), method.invoke(t, null));
 						}
 					}
 				}
@@ -49,4 +55,22 @@ public class ConfigurationFactory {
 
 	}
 
+	
+	// 单列模式加载
+		private static class Singteton {
+			private static ConfigurationFactory configurationFactory;
+			static {
+				configurationFactory = new ConfigurationFactory();
+			}
+
+			public static ConfigurationFactory getInstance() {
+				return configurationFactory;
+			}
+		}
+
+		public static ConfigurationFactory getInstance() {
+			return Singteton.getInstance();
+		}
+
+	
 }

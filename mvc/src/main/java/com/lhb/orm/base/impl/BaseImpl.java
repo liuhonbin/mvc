@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
+import com.lhb.mvc.core.DispatcherServlet;
 import com.lhb.orm.base.BaseDao;
 import com.lhb.orm.base.BaseEntity;
 import com.lhb.orm.util.DBUtil;
@@ -15,6 +18,8 @@ import com.lhb.orm.util.DTOUtils;
 import com.lhb.orm.util.SqlUtil;
 
 public class BaseImpl implements BaseDao {
+	
+	private Logger logger = Logger.getLogger(BaseImpl.class);
 
 	protected DBUtil dbUtil;
 
@@ -23,7 +28,7 @@ public class BaseImpl implements BaseDao {
 	}
 
 	public void setDataSource(DataSource dataSource) throws RuntimeException {
-		dbUtil.setDataSource(dataSource);
+		dbUtil = new DBUtil(dataSource);
 	}
 
 	public <T> List<T> getList(String sql, Class<T> clazz, Object baseEntity) {
@@ -32,6 +37,7 @@ public class BaseImpl implements BaseDao {
 		ResultSet rs = null;
 		try {
 			newSql = SqlUtil.sqlPrament(sql, baseEntity);
+			debug(newSql);
 			rs = dbUtil.query(newSql);
 			while (rs.next()) {
 				list.add(DTOUtils.ReqBuildEntity(rs, clazz));
@@ -63,6 +69,7 @@ public class BaseImpl implements BaseDao {
 		ResultSet rs = null;
 		try {
 			newSql = SqlUtil.sqlPrament(sql, baseEntity);
+			debug(newSql);
 			rs = dbUtil.query(newSql);
 			while (rs.next()) {
 				return DTOUtils.ReqBuildEntity(rs, clazz);
@@ -94,6 +101,7 @@ public class BaseImpl implements BaseDao {
 		int a = 0;
 		try {
 			String new_sql = SqlUtil.sqlPrament(sql, baseEntity);
+			debug(new_sql);
 			a = dbUtil.other(new_sql);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
@@ -119,6 +127,7 @@ public class BaseImpl implements BaseDao {
 		int a = 0;
 		try {
 			String new_sql = SqlUtil.sqlPrament(sql, baseEntity);
+			debug(new_sql);
 			a = dbUtil.other(new_sql);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
@@ -145,6 +154,7 @@ public class BaseImpl implements BaseDao {
 		int a = 0;
 		try {
 			String new_sql = SqlUtil.sqlPrament(sql, baseEntity);
+			debug(new_sql);
 			a = dbUtil.other(new_sql);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
@@ -169,6 +179,13 @@ public class BaseImpl implements BaseDao {
 	public <T> int add(String sql, List<Object> list) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	
+	private void debug(Object object) {
+		if(logger.isDebugEnabled()) {
+			logger.debug(object);
+		}
 	}
 
 }

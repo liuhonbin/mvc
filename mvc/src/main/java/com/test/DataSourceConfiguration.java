@@ -19,7 +19,7 @@ public final class DataSourceConfiguration {
 	public DataSource dataSource() {
 		DruidDataSource dataSource = new DruidDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/xs");
+		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/xs?useUnicode=true&characterEncoding=UTF-8");
 		dataSource.setUsername("root");
 		dataSource.setPassword("123456");
 		return dataSource;
@@ -33,7 +33,7 @@ public final class DataSourceConfiguration {
 	public DataSource dataSourceBack() {
 		DruidDataSource dataSource = new DruidDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/xs_back");
+		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/xs_back?useUnicode=true&characterEncoding=UTF-8");
 		dataSource.setUsername("root");
 		dataSource.setPassword("123456");
 		return dataSource;
@@ -46,8 +46,8 @@ public final class DataSourceConfiguration {
 	@Bean
 	public DataSourceSetting dataSourceSetting() {
 		DataSourceSetting dataSourceSetting = new DataSourceSetting();
-		dataSourceSetting.setSlave("datasource", SqlType.SELECT);
-		dataSourceSetting.setMaster("back", SqlType.INSERT,SqlType.DELETE,SqlType.UPDATE);
+		dataSourceSetting.setSlave(dataSource(), SqlType.SELECT);
+		dataSourceSetting.setMaster(dataSourceBack(), SqlType.INSERT,SqlType.DELETE,SqlType.UPDATE);
 		return dataSourceSetting;
 	}
 }

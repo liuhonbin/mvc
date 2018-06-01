@@ -23,5 +23,15 @@ public class TestController {
 		List<Book> list = dao.getList(book);
 		return list;
 	}
+	
+	@RequestMapping("add.do")
+	@ResponseBody
+	public int add() {
+		Book book = new Book();
+		book.setBook_id("2");
+		book.setBook_name("我的测试数据68");
+		int a = dao.add(book);
+		return a;
+	}
 
 }
