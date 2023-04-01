@@ -55,9 +55,11 @@ public class ContextLoader {
 
 	private static void doScanner(String packageName) {
 		// 把所有的.替换成/
+
 		String path = Thread.currentThread().getContextClassLoader()
 				.getResource("/" + packageName.replaceAll("\\.", "/")).getPath();
 		File dir = new File(path);
+
 		for (File file : dir.listFiles()) {
 			if (file.isDirectory()) {
 				// 递归读取包
