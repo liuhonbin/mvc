@@ -7,13 +7,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 @Documented
 public @interface update {
 
-	abstract String sql() default "";
+    abstract String sql() default "";
 
-	String dataSourceName() default "datasource";
+    String dataSourceName() default "datasource";
 
-	String type() default "UPDATE";
+    String type() default "UPDATE";
 }

@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Bean {
 
-	String name() default "";
+    String name() default "";
 
 }

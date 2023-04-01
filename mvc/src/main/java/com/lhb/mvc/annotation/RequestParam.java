@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface RequestParam {
-	/**
-	 * 表示参数的别名，必填
-	 * 
-	 * @return
-	 */
-	abstract String value();
+    /**
+     * 表示参数的别名，必填
+     *
+     * @return
+     */
+    abstract String value();
 
 }

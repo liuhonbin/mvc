@@ -5,17 +5,17 @@ import java.util.Map;
 
 public interface WrapperProxy extends Wrapper {
 
-	long getId();
+    long getId();
 
-	Object getRawObject();
+    Object getRawObject();
 
-	int getAttributesSize();
+    int getAttributesSize();
 
-	void clearAttributes();
+    void clearAttributes();
 
-	Map<String, Object> getAttributes();
+    Map<String, Object> getAttributes();
 
-	Object getAttribute(String key);
+    Object getAttribute(String key);
 
-	void putAttribute(String key, Object value);
+    void putAttribute(String key, Object value);
 }

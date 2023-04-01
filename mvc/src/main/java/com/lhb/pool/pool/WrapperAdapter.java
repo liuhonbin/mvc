@@ -4,7 +4,7 @@ import java.sql.Wrapper;
 
 public class WrapperAdapter implements Wrapper {
 
-    public WrapperAdapter(){
+    public WrapperAdapter() {
     }
 
     public boolean isWrapperFor(Class<?> iface) {

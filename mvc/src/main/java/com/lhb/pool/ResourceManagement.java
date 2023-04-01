@@ -9,39 +9,39 @@ import java.util.logging.Logger;
 import javax.sql.CommonDataSource;
 
 /**
- * 
-* <p>Copyright： Copyright (c) 2017</p>
-* <p>Company： 熠道大数据</p>
-* @ClassName: ResourceManagement  
-* @Description: TODO(管理器)  
-* @author liuhonbin  
-* @date 2018年4月24日
+ * <p>Copyright： Copyright (c) 2017</p>
+ * <p>Company： 熠道大数据</p>
+ *
+ * @author liuhonbin
+ * @ClassName: ResourceManagement
+ * @Description: TODO(管理器)
+ * @date 2018年4月24日
  */
 public class ResourceManagement extends LogResourceManagement {
-	
-	public ResourceManagement() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public ResourceManagement() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setLoginTimeout(int seconds) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public int getLoginTimeout() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	
+    public void setLoginTimeout(int seconds) throws SQLException {
+        // TODO Auto-generated method stub
+
+    }
+
+    public int getLoginTimeout() throws SQLException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+
 }

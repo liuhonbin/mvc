@@ -3,11 +3,11 @@ package com.lhb.pool.pool;
 import java.sql.SQLException;
 import java.sql.Wrapper;
 
-public class PoolableWrapper implements Wrapper{
+public class PoolableWrapper implements Wrapper {
 
-	private final Wrapper wrapper;
+    private final Wrapper wrapper;
 
-    public PoolableWrapper(Wrapper wraaper){
+    public PoolableWrapper(Wrapper wraaper) {
         this.wrapper = wraaper;
     }
 
@@ -29,7 +29,7 @@ public class PoolableWrapper implements Wrapper{
         if (iface == this.getClass()) {
             return true;
         }
-        
+
         if (!(wrapper instanceof WrapperProxy)) {
             if (iface.isInstance(wrapper)) {
                 return true;
@@ -58,7 +58,7 @@ public class PoolableWrapper implements Wrapper{
         if (iface == this.getClass()) {
             return (T) this;
         }
-        
+
         if (!(wrapper instanceof WrapperProxy)) {
             if (iface.isInstance(wrapper)) {
                 return (T) wrapper;
@@ -69,5 +69,5 @@ public class PoolableWrapper implements Wrapper{
         return wrapper.unwrap(iface);
     }
 
-	
+
 }

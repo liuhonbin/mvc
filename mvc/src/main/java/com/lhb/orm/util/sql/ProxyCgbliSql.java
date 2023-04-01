@@ -22,72 +22,72 @@ import net.sf.cglib.proxy.InvocationHandler;
 
 public class ProxyCgbliSql implements InvocationHandler {
 
-	private BaseDao dao;
-	private BeanFactory factory = new Bean4Obtain();
+    private BaseDao dao;
+    private BeanFactory factory = new Bean4Obtain();
 
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		return in(proxy, method, args);
-	}
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        return in(proxy, method, args);
+    }
 
-	private Object in(Object proxy, Method method, Object[] args)
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException {
-		try {
-			dao = new BaseImpl(factory.getBean("datasource", DataSource.class));
-			DataSourceSetting dataSourceSetting = null;
-			if (factory.getBean("datasourcesetting") != null) {
-				dataSourceSetting = factory.getBean("datasourcesetting", DataSourceSetting.class);
-			}
-			Class<?> returnType = method.getReturnType();
-			Annotation annotation[] = method.getAnnotations();
-			if (returnType.getName().contains("java.util.List")) {
-				if (annotation.length > 0) {
-					for (Annotation an : annotation) {
-						if (an instanceof select) {
-							select sql_object = (select) an;
-							if (dataSourceSetting != null) {
-								dao.setDataSource(dataSourceSetting.getDataSource(sql_object.type()));
-							}
-							return dao.getList(sql_object.sql(), sql_object.return_type(), (Object) args[0]);
-						}
+    private Object in(Object proxy, Method method, Object[] args)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException {
+        try {
+            dao = new BaseImpl(factory.getBean("datasource", DataSource.class));
+            DataSourceSetting dataSourceSetting = null;
+            if (factory.getBean("datasourcesetting") != null) {
+                dataSourceSetting = factory.getBean("datasourcesetting", DataSourceSetting.class);
+            }
+            Class<?> returnType = method.getReturnType();
+            Annotation annotation[] = method.getAnnotations();
+            if (returnType.getName().contains("java.util.List")) {
+                if (annotation.length > 0) {
+                    for (Annotation an : annotation) {
+                        if (an instanceof select) {
+                            select sql_object = (select) an;
+                            if (dataSourceSetting != null) {
+                                dao.setDataSource(dataSourceSetting.getDataSource(sql_object.type()));
+                            }
+                            return dao.getList(sql_object.sql(), sql_object.return_type(), (Object) args[0]);
+                        }
 
-					}
-				}
-			} else {
-				if (annotation.length > 0) {
-					for (Annotation an : annotation) {
-						if (an instanceof update) {
-							update update_object = (update) an;
-							if (dataSourceSetting != null) {
-								dao.setDataSource(dataSourceSetting.getDataSource(update_object.type()));
-							}
-							return dao.update(update_object.sql(), (Object) args[0]);
-						} else if (an instanceof delete) {
-							delete delete_object = (delete) an;
-							if (dataSourceSetting != null) {
-								dao.setDataSource(dataSourceSetting.getDataSource(delete_object.type()));
-							}
-							return dao.delete(delete_object.sql(), (Object) args[0]);
-						} else if (an instanceof select) {
-							select sql_object = (select) an;
-							if (dataSourceSetting != null) {
-								dao.setDataSource(dataSourceSetting.getDataSource(sql_object.type()));
-							}
-							return dao.queryForObject(sql_object.sql(), sql_object.return_type(), (Object) args[0]);
-						} else if (an instanceof insert) {
-							insert insert_object = (insert) an;
-							if (dataSourceSetting != null) {
-								dao.setDataSource(dataSourceSetting.getDataSource(insert_object.type()));
-							}
-							return dao.add(insert_object.sql(), (Object) args[0]);
-						}
-					}
-				}
-			}
-		} catch (BeansException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return null;
-	}
+                    }
+                }
+            } else {
+                if (annotation.length > 0) {
+                    for (Annotation an : annotation) {
+                        if (an instanceof update) {
+                            update update_object = (update) an;
+                            if (dataSourceSetting != null) {
+                                dao.setDataSource(dataSourceSetting.getDataSource(update_object.type()));
+                            }
+                            return dao.update(update_object.sql(), (Object) args[0]);
+                        } else if (an instanceof delete) {
+                            delete delete_object = (delete) an;
+                            if (dataSourceSetting != null) {
+                                dao.setDataSource(dataSourceSetting.getDataSource(delete_object.type()));
+                            }
+                            return dao.delete(delete_object.sql(), (Object) args[0]);
+                        } else if (an instanceof select) {
+                            select sql_object = (select) an;
+                            if (dataSourceSetting != null) {
+                                dao.setDataSource(dataSourceSetting.getDataSource(sql_object.type()));
+                            }
+                            return dao.queryForObject(sql_object.sql(), sql_object.return_type(), (Object) args[0]);
+                        } else if (an instanceof insert) {
+                            insert insert_object = (insert) an;
+                            if (dataSourceSetting != null) {
+                                dao.setDataSource(dataSourceSetting.getDataSource(insert_object.type()));
+                            }
+                            return dao.add(insert_object.sql(), (Object) args[0]);
+                        }
+                    }
+                }
+            }
+        } catch (BeansException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

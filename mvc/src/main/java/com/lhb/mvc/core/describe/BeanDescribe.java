@@ -13,34 +13,32 @@ import org.apache.log4j.Logger;
  * This is an offense for viewing object information, mainly for developers to
  * know what information they are writing in the controller, which is convenient
  * for debugging.
- * 
- * @author lhb@xiu
  *
+ * @author lhb@xiu
  */
 public class BeanDescribe {
 
-	private static Logger logger = Logger.getLogger(BeanDescribe.class);
+    private static Logger logger = Logger.getLogger(BeanDescribe.class);
 
-	/**
-	 * It's just a class description for getting an object, and an attribute
-	 * description, a static method described by the method.
-	 * 
-	 * @param clazz
-	 *            Described object
-	 */
-	public static void getBeanInfo(Class<? extends Object> clazz, String url) {
-		BeanInfo beanInfo;
-		try {
-			beanInfo = Introspector.getBeanInfo(clazz, Object.class);
-			// BeanDescriptor beanDescriptor = beanInfo.getBeanDescriptor();
-			MethodDescriptor[] MethodDescriptors = beanInfo.getMethodDescriptors();
-			for (MethodDescriptor methodDescriptor : MethodDescriptors) {
-				logger.debug("Mapped:{[" + url + "]} onto " + methodDescriptor.getMethod());
-			}
-		} catch (IntrospectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /**
+     * It's just a class description for getting an object, and an attribute
+     * description, a static method described by the method.
+     *
+     * @param clazz Described object
+     */
+    public static void getBeanInfo(Class<? extends Object> clazz, String url) {
+        BeanInfo beanInfo;
+        try {
+            beanInfo = Introspector.getBeanInfo(clazz, Object.class);
+            // BeanDescriptor beanDescriptor = beanInfo.getBeanDescriptor();
+            MethodDescriptor[] MethodDescriptors = beanInfo.getMethodDescriptors();
+            for (MethodDescriptor methodDescriptor : MethodDescriptors) {
+                logger.debug("Mapped:{[" + url + "]} onto " + methodDescriptor.getMethod());
+            }
+        } catch (IntrospectionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }

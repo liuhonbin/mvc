@@ -6,14 +6,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME) 
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
 public @interface delete {
-     
-	abstract String sql() default ""; 
-	 
-	String dataSourceName() default "datasource";
-	
-	String type() default "DELETE";
+
+    abstract String sql() default "";
+
+    String dataSourceName() default "datasource";
+
+    String type() default "DELETE";
 }

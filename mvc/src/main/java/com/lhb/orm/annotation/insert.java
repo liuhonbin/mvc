@@ -6,15 +6,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME) 
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
 public @interface insert {
-	
-	abstract String sql() default ""; 
-	 
-	String dataSourceName() default "datasource";
-	
-	String type() default "INSERT";
+
+    abstract String sql() default "";
+
+    String dataSourceName() default "datasource";
+
+    String type() default "INSERT";
 
 }

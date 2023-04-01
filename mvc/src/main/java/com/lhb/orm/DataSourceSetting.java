@@ -12,45 +12,45 @@ import com.lhb.core.factory.BeanFactory;
 
 public final class DataSourceSetting {
 
-	private BeanFactory factory = new Bean4Obtain();
+    private BeanFactory factory = new Bean4Obtain();
 
-	private DataSource master;
+    private DataSource master;
 
-	private DataSource slave;
+    private DataSource slave;
 
-	private Map<String, DataSource> sqlDataSource = new HashMap<String, DataSource>();
+    private Map<String, DataSource> sqlDataSource = new HashMap<String, DataSource>();
 
-	public DataSourceSetting() {
+    public DataSourceSetting() {
 
-	}
+    }
 
-	public DataSource getMaster() {
-		return master;
-	}
+    public DataSource getMaster() {
+        return master;
+    }
 
-	public void setMaster(DataSource master, Object... sqlType) {
-		this.master = master;
-		for (Object sqlType2 : sqlType) {
-			sqlDataSource.put(sqlType2.toString(), this.master);
-		}
-	}
+    public void setMaster(DataSource master, Object... sqlType) {
+        this.master = master;
+        for (Object sqlType2 : sqlType) {
+            sqlDataSource.put(sqlType2.toString(), this.master);
+        }
+    }
 
-	public DataSource getSlave() {
-		return slave;
-	}
+    public DataSource getSlave() {
+        return slave;
+    }
 
-	public void setSlave(DataSource slave, Object... sqlType) {
-		this.slave = slave;
-		for (Object sqlType2 : sqlType) {
-			sqlDataSource.put(sqlType2.toString(), this.slave);
-		}
-	}
+    public void setSlave(DataSource slave, Object... sqlType) {
+        this.slave = slave;
+        for (Object sqlType2 : sqlType) {
+            sqlDataSource.put(sqlType2.toString(), this.slave);
+        }
+    }
 
-	public DataSource getDataSource(String type) throws RuntimeException {
-		if (sqlDataSource.get(type) == null) {
-			throw new RuntimeException("It doesn't exist type:'" + type + "'");
-		}
-		return sqlDataSource.get(type);
-	}
+    public DataSource getDataSource(String type) throws RuntimeException {
+        if (sqlDataSource.get(type) == null) {
+            throw new RuntimeException("It doesn't exist type:'" + type + "'");
+        }
+        return sqlDataSource.get(type);
+    }
 
 }
